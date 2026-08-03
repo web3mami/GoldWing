@@ -7,12 +7,15 @@ import {
   closeRegistration,
   reopenRegistration,
 } from "./actions";
+import EditForm from "./edit-form";
 
 type Tournament = {
   id: string;
   name: string;
   slug: string;
   status: string;
+  description: string | null;
+  advance_per_group: number;
 };
 
 type Registration = {
@@ -33,7 +36,8 @@ const STATUS_LABEL: Record<string, string> = {
 
 async function getTournament(slug: string): Promise<Tournament | null> {
   const rows = await sql`
-    SELECT id, name, slug, status FROM gw_tournaments WHERE slug = ${slug} LIMIT 1
+    SELECT id, name, slug, status, description, advance_per_group
+    FROM gw_tournaments WHERE slug = ${slug} LIMIT 1
   `;
   return (rows[0] as Tournament) ?? null;
 }
@@ -101,6 +105,16 @@ export default async function ManageTournament({
               <button className="btn-fut btn-fut-secondary">Reopen registration</button>
             </form>
           ) : null}
+        </div>
+
+        {/* Edit details */}
+        <div className="mb-10">
+          <EditForm
+            slug={tournament.slug}
+            name={tournament.name}
+            description={tournament.description}
+            advancePerGroup={tournament.advance_per_group}
+          />
         </div>
 
         {/* Stat row */}
