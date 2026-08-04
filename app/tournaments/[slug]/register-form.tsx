@@ -37,7 +37,7 @@ export default function RegisterForm({ slug }: { slug: string }) {
           type="text"
           required
           maxLength={60}
-          className="w-full rounded-lg border border-border bg-surface-2 px-4 py-3 text-broadcast outline-none transition focus:border-gold-bright"
+          className="w-full rounded-lg border border-border bg-surface-2 px-4 py-3 text-broadcast outline-none transition focus:border-primary-bright"
           placeholder="e.g. Golden Boot FC"
         />
       </div>
@@ -51,7 +51,7 @@ export default function RegisterForm({ slug }: { slug: string }) {
           name="x_username"
           type="text"
           required
-          className="w-full rounded-lg border border-border bg-surface-2 px-4 py-3 text-broadcast outline-none transition focus:border-gold-bright"
+          className="w-full rounded-lg border border-border bg-surface-2 px-4 py-3 text-broadcast outline-none transition focus:border-primary-bright"
           placeholder="@yourhandle"
         />
       </div>
@@ -65,7 +65,7 @@ export default function RegisterForm({ slug }: { slug: string }) {
           name="efootball_id"
           type="text"
           maxLength={40}
-          className="w-full rounded-lg border border-border bg-surface-2 px-4 py-3 text-broadcast outline-none transition focus:border-gold-bright"
+          className="w-full rounded-lg border border-border bg-surface-2 px-4 py-3 text-broadcast outline-none transition focus:border-primary-bright"
           placeholder="So opponents can add you in-game"
         />
       </div>

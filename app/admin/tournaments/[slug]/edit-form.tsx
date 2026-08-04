@@ -54,7 +54,7 @@ export default function EditForm({
               required
               maxLength={80}
               defaultValue={name}
-              className="w-full rounded-lg border border-border bg-surface-2 px-4 py-3 text-broadcast outline-none transition focus:border-gold-bright"
+              className="w-full rounded-lg border border-border bg-surface-2 px-4 py-3 text-broadcast outline-none transition focus:border-primary-bright"
             />
           </div>
 
@@ -68,7 +68,7 @@ export default function EditForm({
               rows={3}
               maxLength={500}
               defaultValue={description ?? ""}
-              className="w-full resize-none rounded-lg border border-border bg-surface-2 px-4 py-3 text-broadcast outline-none transition focus:border-gold-bright"
+              className="w-full resize-none rounded-lg border border-border bg-surface-2 px-4 py-3 text-broadcast outline-none transition focus:border-primary-bright"
             />
           </div>
 
@@ -83,7 +83,7 @@ export default function EditForm({
                 type="text"
                 maxLength={60}
                 defaultValue={prizePool ?? ""}
-                className="w-full rounded-lg border border-border bg-surface-2 px-4 py-3 text-broadcast outline-none transition focus:border-gold-bright"
+                className="w-full rounded-lg border border-border bg-surface-2 px-4 py-3 text-broadcast outline-none transition focus:border-primary-bright"
                 placeholder="e.g. $100 + trophy"
               />
             </div>
@@ -96,7 +96,7 @@ export default function EditForm({
                 name="registration_deadline"
                 type="datetime-local"
                 defaultValue={toLocalInput(registrationDeadline)}
-                className="w-full rounded-lg border border-border bg-surface-2 px-4 py-3 text-broadcast outline-none transition focus:border-gold-bright [color-scheme:dark]"
+                className="w-full rounded-lg border border-border bg-surface-2 px-4 py-3 text-broadcast outline-none transition focus:border-primary-bright [color-scheme:dark]"
               />
             </div>
           </div>
@@ -113,7 +113,7 @@ export default function EditForm({
               max={8}
               required
               defaultValue={advancePerGroup}
-              className="w-32 rounded-lg border border-border bg-surface-2 px-4 py-3 text-broadcast outline-none transition focus:border-gold-bright"
+              className="w-32 rounded-lg border border-border bg-surface-2 px-4 py-3 text-broadcast outline-none transition focus:border-primary-bright"
             />
             <p className="mt-1.5 text-xs text-muted">
               How many top squads from each group reach the knockout.

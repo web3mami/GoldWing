@@ -78,7 +78,7 @@ export default async function ManageTournament({
       {/* Header */}
       <header className="relative z-10 border-b border-border/80 bg-ink/80 backdrop-blur-sm">
         <div className="mx-auto flex max-w-4xl items-center justify-between px-6 py-4">
-          <Link href="/admin" className="flex items-center gap-2 text-sm text-muted transition hover:text-gold-bright">
+          <Link href="/admin" className="flex items-center gap-2 text-sm text-muted transition hover:text-primary-bright">
             ← Dashboard
           </Link>
           <Link href={`/tournaments/${slug}`} className="btn-fut btn-fut-secondary">
@@ -208,7 +208,7 @@ function RegSection({
                       href={`https://x.com/${r.x_username.replace(/^@/, "")}`}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="text-rare transition hover:text-gold-bright"
+                      className="text-rare transition hover:text-primary-bright"
                     >
                       {r.x_username}
                     </a>

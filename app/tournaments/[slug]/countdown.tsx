@@ -63,13 +63,13 @@ export default function Countdown({ deadlineIso }: { deadlineIso: string }) {
       {rem.days > 0 && (
         <>
           <Unit value={rem.days} label="Days" />
-          <span className="font-display text-2xl text-gold-dim">:</span>
+          <span className="font-display text-2xl text-accent">:</span>
         </>
       )}
       <Unit value={rem.hours} label="Hrs" />
-      <span className="font-display text-2xl text-gold-dim">:</span>
+      <span className="font-display text-2xl text-accent">:</span>
       <Unit value={rem.minutes} label="Min" />
-      <span className="font-display text-2xl text-gold-dim">:</span>
+      <span className="font-display text-2xl text-accent">:</span>
       <Unit value={rem.seconds} label="Sec" />
     </div>
   );

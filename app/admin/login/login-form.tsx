@@ -23,7 +23,7 @@ export default function LoginForm() {
           type="password"
           autoFocus
           required
-          className="w-full rounded-lg border border-border bg-surface-2 px-4 py-3 text-broadcast outline-none transition focus:border-gold-bright"
+          className="w-full rounded-lg border border-border bg-surface-2 px-4 py-3 text-broadcast outline-none transition focus:border-primary-bright"
           placeholder="Enter your secret password"
         />
       </div>

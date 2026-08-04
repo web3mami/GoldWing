@@ -23,7 +23,7 @@ export default function CreateTournamentForm() {
           type="text"
           required
           maxLength={80}
-          className="w-full rounded-lg border border-border bg-surface-2 px-4 py-3 text-broadcast outline-none transition focus:border-gold-bright"
+          className="w-full rounded-lg border border-border bg-surface-2 px-4 py-3 text-broadcast outline-none transition focus:border-primary-bright"
           placeholder="e.g. GoldWing Summer Cup"
         />
       </div>
@@ -37,7 +37,7 @@ export default function CreateTournamentForm() {
           name="description"
           rows={3}
           maxLength={500}
-          className="w-full resize-none rounded-lg border border-border bg-surface-2 px-4 py-3 text-broadcast outline-none transition focus:border-gold-bright"
+          className="w-full resize-none rounded-lg border border-border bg-surface-2 px-4 py-3 text-broadcast outline-none transition focus:border-primary-bright"
           placeholder="Rules, format notes, or anything players should know."
         />
       </div>
@@ -52,7 +52,7 @@ export default function CreateTournamentForm() {
             name="prize_pool"
             type="text"
             maxLength={60}
-            className="w-full rounded-lg border border-border bg-surface-2 px-4 py-3 text-broadcast outline-none transition focus:border-gold-bright"
+            className="w-full rounded-lg border border-border bg-surface-2 px-4 py-3 text-broadcast outline-none transition focus:border-primary-bright"
             placeholder="e.g. $100 + trophy"
           />
         </div>
@@ -64,7 +64,7 @@ export default function CreateTournamentForm() {
             id="registration_deadline"
             name="registration_deadline"
             type="datetime-local"
-            className="w-full rounded-lg border border-border bg-surface-2 px-4 py-3 text-broadcast outline-none transition focus:border-gold-bright [color-scheme:dark]"
+            className="w-full rounded-lg border border-border bg-surface-2 px-4 py-3 text-broadcast outline-none transition focus:border-primary-bright [color-scheme:dark]"
           />
         </div>
       </div>

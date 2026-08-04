@@ -79,7 +79,7 @@ export default async function Home() {
 
             <h1 className="font-display mt-6 text-5xl font-bold leading-none tracking-wide text-broadcast sm:text-7xl">
               GOLDWING
-              <span className="mt-1 block bg-gradient-to-r from-gold-bright via-gold to-gold-dim bg-clip-text text-transparent">
+              <span className="mt-1 block bg-gradient-to-r from-primary-bright via-primary to-accent bg-clip-text text-transparent">
                 CUP {year}
               </span>
             </h1>
@@ -147,7 +147,7 @@ export default async function Home() {
                 href="https://x.com/web3mami"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="mt-6 inline-block text-xs font-bold uppercase tracking-widest text-rare transition hover:text-gold-bright"
+                className="mt-6 inline-block text-xs font-bold uppercase tracking-widest text-rare transition hover:text-primary-bright"
               >
                 @web3mami →
               </a>
@@ -183,7 +183,7 @@ export default async function Home() {
                         {t.description}
                       </p>
                     )}
-                    <p className="mt-4 text-xs font-bold uppercase tracking-widest text-gold-bright">
+                    <p className="mt-4 text-xs font-bold uppercase tracking-widest text-primary-bright">
                       Select card →
                     </p>
                   </div>
@@ -207,7 +207,7 @@ export default async function Home() {
               <div key={c.step} className="format-step">
                 <div className="format-step-inner">
                   <div className="flex items-center justify-between">
-                    <span className="font-display text-3xl font-bold text-gold-dim">
+                    <span className="font-display text-3xl font-bold text-accent">
                       {c.step}
                     </span>
                     <span className="rarity-badge">{c.stat}</span>
@@ -233,7 +233,7 @@ export default async function Home() {
             href="https://x.com/web3mami"
             target="_blank"
             rel="noopener noreferrer"
-            className="text-xs font-bold uppercase tracking-widest text-muted transition hover:text-gold-bright"
+            className="text-xs font-bold uppercase tracking-widest text-muted transition hover:text-primary-bright"
           >
             @web3mami
           </a>
