@@ -10,6 +10,8 @@ CREATE TABLE IF NOT EXISTS gw_tournaments (
   name              TEXT NOT NULL,
   slug              TEXT NOT NULL UNIQUE,
   description       TEXT,
+  prize_pool        TEXT,                       -- free text, e.g. "$100", "50 USDC + trophy"
+  registration_deadline TIMESTAMPTZ,            -- when registration closes (drives the countdown)
   status            TEXT NOT NULL DEFAULT 'registration'
                       CHECK (status IN ('draft','registration','groups','knockout','completed')),
   points_win        INTEGER NOT NULL DEFAULT 3,
@@ -18,6 +20,10 @@ CREATE TABLE IF NOT EXISTS gw_tournaments (
   advance_per_group INTEGER NOT NULL DEFAULT 2,
   created_at        TIMESTAMPTZ NOT NULL DEFAULT now()
 );
+
+-- Add new columns to existing databases (safe to run repeatedly).
+ALTER TABLE gw_tournaments ADD COLUMN IF NOT EXISTS prize_pool TEXT;
+ALTER TABLE gw_tournaments ADD COLUMN IF NOT EXISTS registration_deadline TIMESTAMPTZ;
 
 -- GROUPS: created when admin draws groups after registration closes (e.g. Group A).
 CREATE TABLE IF NOT EXISTS gw_groups (

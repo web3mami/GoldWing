@@ -9,10 +9,25 @@ type Props = {
   slug: string;
   name: string;
   description: string | null;
+  prizePool: string | null;
+  registrationDeadline: string | null; // ISO string or null
   advancePerGroup: number;
 };
 
-export default function EditForm({ slug, name, description, advancePerGroup }: Props) {
+// Convert a stored ISO timestamp to the "YYYY-MM-DDTHH:mm" datetime-local needs (UTC).
+function toLocalInput(iso: string | null): string {
+  if (!iso) return "";
+  return new Date(iso).toISOString().slice(0, 16);
+}
+
+export default function EditForm({
+  slug,
+  name,
+  description,
+  prizePool,
+  registrationDeadline,
+  advancePerGroup,
+}: Props) {
   const [state, action, pending] = useActionState(updateTournament, initialState);
 
   return (
@@ -55,6 +70,35 @@ export default function EditForm({ slug, name, description, advancePerGroup }: P
               defaultValue={description ?? ""}
               className="w-full resize-none rounded-lg border border-border bg-surface-2 px-4 py-3 text-broadcast outline-none transition focus:border-gold-bright"
             />
+          </div>
+
+          <div className="grid gap-4 sm:grid-cols-2">
+            <div>
+              <label htmlFor="edit-prize" className="section-label mb-2 block">
+                Prize pool <span className="normal-case text-muted">(optional)</span>
+              </label>
+              <input
+                id="edit-prize"
+                name="prize_pool"
+                type="text"
+                maxLength={60}
+                defaultValue={prizePool ?? ""}
+                className="w-full rounded-lg border border-border bg-surface-2 px-4 py-3 text-broadcast outline-none transition focus:border-gold-bright"
+                placeholder="e.g. $100 + trophy"
+              />
+            </div>
+            <div>
+              <label htmlFor="edit-deadline" className="section-label mb-2 block">
+                Registration closes <span className="normal-case text-muted">(optional)</span>
+              </label>
+              <input
+                id="edit-deadline"
+                name="registration_deadline"
+                type="datetime-local"
+                defaultValue={toLocalInput(registrationDeadline)}
+                className="w-full rounded-lg border border-border bg-surface-2 px-4 py-3 text-broadcast outline-none transition focus:border-gold-bright [color-scheme:dark]"
+              />
+            </div>
           </div>
 
           <div>

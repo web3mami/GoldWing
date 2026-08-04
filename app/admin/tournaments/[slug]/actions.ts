@@ -22,6 +22,8 @@ export async function updateTournament(
   const slug = (formData.get("slug") ?? "").toString();
   const name = (formData.get("name") ?? "").toString().trim();
   const description = (formData.get("description") ?? "").toString().trim();
+  const prizePool = (formData.get("prize_pool") ?? "").toString().trim();
+  const deadlineRaw = (formData.get("registration_deadline") ?? "").toString().trim();
   const advanceRaw = (formData.get("advance_per_group") ?? "").toString();
   const advance = Number.parseInt(advanceRaw, 10);
 
@@ -31,10 +33,17 @@ export async function updateTournament(
     return { error: "Advance per group must be between 1 and 8." };
   }
 
+  const deadline = deadlineRaw ? new Date(`${deadlineRaw}Z`) : null;
+  if (deadline && Number.isNaN(deadline.getTime())) {
+    return { error: "Registration deadline is not a valid date." };
+  }
+
   await sql`
     UPDATE gw_tournaments
     SET name = ${name},
         description = ${description || null},
+        prize_pool = ${prizePool || null},
+        registration_deadline = ${deadline ? deadline.toISOString() : null},
         advance_per_group = ${advance}
     WHERE slug = ${slug}
   `;

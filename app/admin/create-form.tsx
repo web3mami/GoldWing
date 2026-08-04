@@ -38,8 +38,35 @@ export default function CreateTournamentForm() {
           rows={3}
           maxLength={500}
           className="w-full resize-none rounded-lg border border-border bg-surface-2 px-4 py-3 text-broadcast outline-none transition focus:border-gold-bright"
-          placeholder="Prize, rules, dates, or anything players should know."
+          placeholder="Rules, format notes, or anything players should know."
         />
+      </div>
+
+      <div className="grid gap-4 sm:grid-cols-2">
+        <div>
+          <label htmlFor="prize_pool" className="section-label mb-2 block">
+            Prize pool <span className="normal-case text-muted">(optional)</span>
+          </label>
+          <input
+            id="prize_pool"
+            name="prize_pool"
+            type="text"
+            maxLength={60}
+            className="w-full rounded-lg border border-border bg-surface-2 px-4 py-3 text-broadcast outline-none transition focus:border-gold-bright"
+            placeholder="e.g. $100 + trophy"
+          />
+        </div>
+        <div>
+          <label htmlFor="registration_deadline" className="section-label mb-2 block">
+            Registration closes <span className="normal-case text-muted">(optional)</span>
+          </label>
+          <input
+            id="registration_deadline"
+            name="registration_deadline"
+            type="datetime-local"
+            className="w-full rounded-lg border border-border bg-surface-2 px-4 py-3 text-broadcast outline-none transition focus:border-gold-bright [color-scheme:dark]"
+          />
+        </div>
       </div>
 
       {state.error && (

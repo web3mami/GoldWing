@@ -38,7 +38,16 @@ export async function createTournamentAction(
 
   const name = (formData.get("name") ?? "").toString().trim();
   const description = (formData.get("description") ?? "").toString().trim();
+  const prizePool = (formData.get("prize_pool") ?? "").toString().trim();
+  const deadlineRaw = (formData.get("registration_deadline") ?? "").toString().trim();
   if (!name) return { error: "Tournament name is required." };
+
+  // datetime-local gives "YYYY-MM-DDTHH:mm" (no zone). Append Z so it parses as UTC
+  // deterministically on any server (local dev or Vercel).
+  const deadline = deadlineRaw ? new Date(`${deadlineRaw}Z`) : null;
+  if (deadline && Number.isNaN(deadline.getTime())) {
+    return { error: "Registration deadline is not a valid date." };
+  }
 
   // Build a unique slug, appending -2, -3, ... on collision.
   const base = slugify(name) || "cup";
@@ -50,8 +59,8 @@ export async function createTournamentAction(
   }
 
   await sql`
-    INSERT INTO gw_tournaments (name, slug, description, status)
-    VALUES (${name}, ${slug}, ${description || null}, 'registration')
+    INSERT INTO gw_tournaments (name, slug, description, prize_pool, registration_deadline, status)
+    VALUES (${name}, ${slug}, ${description || null}, ${prizePool || null}, ${deadline ? deadline.toISOString() : null}, 'registration')
   `;
 
   revalidatePath("/");

@@ -201,3 +201,54 @@ body {
   background-clip: text;
   color: transparent;
 }
+
+/* Prize pool — bold gold banner that stands out from the dark UI */
+.prize-banner {
+  border-radius: 14px;
+  padding: 2px;
+  background: linear-gradient(135deg, #fff3c4 0%, #f5d76e 25%, #d4af37 55%, #b8941f 100%);
+  box-shadow:
+    0 0 32px rgba(212, 175, 55, 0.35),
+    0 8px 24px rgba(0, 0, 0, 0.4);
+  animation: prize-pulse 3s ease-in-out infinite;
+}
+
+.prize-banner-inner {
+  border-radius: 12px;
+  padding: 1rem 1.5rem;
+  background: linear-gradient(135deg, #f8d868 0%, #e6c250 50%, #d4af37 100%);
+  position: relative;
+  overflow: hidden;
+}
+
+.prize-banner-inner::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    105deg,
+    transparent 30%,
+    rgba(255, 255, 255, 0.5) 48%,
+    rgba(255, 255, 255, 0.7) 50%,
+    rgba(255, 255, 255, 0.5) 52%,
+    transparent 70%
+  );
+  transform: translateX(-120%);
+  animation: prize-shine 4s ease-in-out infinite;
+  pointer-events: none;
+}
+
+@keyframes prize-pulse {
+  0%, 100% { box-shadow: 0 0 32px rgba(212, 175, 55, 0.3), 0 8px 24px rgba(0, 0, 0, 0.4); }
+  50% { box-shadow: 0 0 44px rgba(212, 175, 55, 0.5), 0 8px 24px rgba(0, 0, 0, 0.4); }
+}
+
+@keyframes prize-shine {
+  0%, 100% { transform: translateX(-120%); }
+  40%, 60% { transform: translateX(120%); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .prize-banner { animation: none; }
+  .prize-banner-inner::after { animation: none; }
+}

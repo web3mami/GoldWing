@@ -3,12 +3,15 @@ import Image from "next/image";
 import { notFound } from "next/navigation";
 import { sql } from "@/lib/db";
 import RegisterForm from "./register-form";
+import Countdown from "./countdown";
 
 type Tournament = {
   id: string;
   name: string;
   slug: string;
   description: string | null;
+  prize_pool: string | null;
+  registration_deadline: string | null;
   status: string;
   advance_per_group: number;
 };
@@ -28,7 +31,7 @@ const STATUS_LABEL: Record<string, string> = {
 
 async function getTournament(slug: string): Promise<Tournament | null> {
   const rows = await sql`
-    SELECT id, name, slug, description, status, advance_per_group
+    SELECT id, name, slug, description, prize_pool, registration_deadline, status, advance_per_group
     FROM gw_tournaments WHERE slug = ${slug} LIMIT 1
   `;
   return (rows[0] as Tournament) ?? null;
@@ -88,13 +91,13 @@ export default async function TournamentPage({
         </div>
       </header>
 
-      <main className="relative z-10 mx-auto grid w-full max-w-5xl gap-8 px-6 py-12 lg:grid-cols-[1.4fr_1fr]">
+      <main className="relative z-10 mx-auto grid w-full max-w-5xl gap-6 px-5 py-8 sm:px-6 sm:py-12 lg:grid-cols-[1.4fr_1fr] lg:gap-8">
         {/* Left: tournament info + entries */}
         <div>
           <span className="rarity-badge">
             {STATUS_LABEL[tournament.status] ?? tournament.status}
           </span>
-          <h1 className="font-display mt-4 text-5xl font-bold leading-none tracking-wide text-broadcast sm:text-6xl">
+          <h1 className="font-display mt-4 text-4xl font-bold leading-none tracking-wide text-broadcast sm:text-6xl">
             {tournament.name}
           </h1>
           {tournament.description && (
@@ -103,15 +106,46 @@ export default async function TournamentPage({
             </p>
           )}
 
-          <div className="mt-8 flex gap-3">
-            <div className="stat-block rounded-lg px-5 py-3 text-center">
-              <p className="hero-stat text-4xl">{approved.length}</p>
+          {/* Prize pool — standout */}
+          {tournament.prize_pool && (
+            <div className="prize-banner mt-6">
+              <div className="prize-banner-inner">
+                <div className="flex items-center gap-3">
+                  <span className="text-2xl sm:text-3xl">🏆</span>
+                  <div>
+                    <p className="text-[0.625rem] font-bold uppercase tracking-[0.2em] text-ink/70">
+                      Prize pool
+                    </p>
+                    <p className="font-display text-3xl font-bold leading-none text-ink sm:text-4xl">
+                      {tournament.prize_pool}
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          )}
+
+          {/* Countdown */}
+          {tournament.registration_deadline && (
+            <div className="mt-6 rounded-xl border border-border bg-surface/60 p-4 sm:p-5">
+              <p className="section-label mb-3">
+                {tournament.status === "registration"
+                  ? "Registration closes in"
+                  : "Registration deadline passed"}
+              </p>
+              <Countdown deadlineIso={tournament.registration_deadline} />
+            </div>
+          )}
+
+          <div className="mt-6 flex gap-3">
+            <div className="stat-block flex-1 rounded-lg px-4 py-3 text-center sm:flex-none sm:px-5">
+              <p className="hero-stat text-3xl sm:text-4xl">{approved.length}</p>
               <p className="mt-1 text-[0.625rem] font-bold uppercase tracking-widest text-muted">
                 Confirmed
               </p>
             </div>
-            <div className="stat-block rounded-lg px-5 py-3 text-center">
-              <p className="hero-stat text-4xl">{tournament.advance_per_group}</p>
+            <div className="stat-block flex-1 rounded-lg px-4 py-3 text-center sm:flex-none sm:px-5">
+              <p className="hero-stat text-3xl sm:text-4xl">{tournament.advance_per_group}</p>
               <p className="mt-1 text-[0.625rem] font-bold uppercase tracking-widest text-muted">
                 Advance / group
               </p>

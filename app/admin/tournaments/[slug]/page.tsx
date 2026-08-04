@@ -15,6 +15,8 @@ type Tournament = {
   slug: string;
   status: string;
   description: string | null;
+  prize_pool: string | null;
+  registration_deadline: string | null;
   advance_per_group: number;
 };
 
@@ -36,7 +38,7 @@ const STATUS_LABEL: Record<string, string> = {
 
 async function getTournament(slug: string): Promise<Tournament | null> {
   const rows = await sql`
-    SELECT id, name, slug, status, description, advance_per_group
+    SELECT id, name, slug, status, description, prize_pool, registration_deadline, advance_per_group
     FROM gw_tournaments WHERE slug = ${slug} LIMIT 1
   `;
   return (rows[0] as Tournament) ?? null;
@@ -113,6 +115,8 @@ export default async function ManageTournament({
             slug={tournament.slug}
             name={tournament.name}
             description={tournament.description}
+            prizePool={tournament.prize_pool}
+            registrationDeadline={tournament.registration_deadline}
             advancePerGroup={tournament.advance_per_group}
           />
         </div>
