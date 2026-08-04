@@ -205,53 +205,117 @@ body {
   color: transparent;
 }
 
-/* Prize pool — the one gold element (trophy), stands out against the neon UI */
-.prize-banner {
-  border-radius: 14px;
+/* Prize pool — neon showpiece: spinning gradient ring + breathing glow. */
+.prize-neon {
+  position: relative;
+  border-radius: 16px;
   padding: 2px;
-  background: linear-gradient(135deg, #fff3c4 0%, #f5d76e 25%, #d4af37 55%, #b8941f 100%);
-  box-shadow:
-    0 0 32px rgba(212, 175, 55, 0.35),
-    0 8px 24px rgba(0, 0, 0, 0.4);
-  animation: prize-pulse 3s ease-in-out infinite;
+  overflow: hidden;
+  isolation: isolate;
+  box-shadow: 0 0 30px rgba(0, 100, 255, 0.25), 0 8px 28px rgba(0, 0, 0, 0.5);
+  animation: prize-glow 3.2s ease-in-out infinite;
 }
 
-.prize-banner-inner {
-  border-radius: 12px;
-  padding: 1rem 1.5rem;
-  background: linear-gradient(135deg, #f8d868 0%, #e6c250 50%, #d4af37 100%);
+/* Spinning conic-gradient ring (clipped to the rounded rect). */
+.prize-neon::before {
+  content: "";
+  position: absolute;
+  inset: -150%;
+  z-index: 0;
+  background: conic-gradient(
+    from 0deg,
+    #00c2ff, #0064ff, #7a00ff, #e6007e, #ff3d8b, #00c2ff
+  );
+  animation: prize-spin 5s linear infinite;
+}
+
+.prize-neon-inner {
   position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  gap: 0.9rem;
+  border-radius: 14px;
+  padding: 1rem 1.5rem;
+  background: linear-gradient(135deg, #12121c 0%, #0c0c14 100%);
   overflow: hidden;
 }
 
-.prize-banner-inner::after {
+/* Sheen sweep across the inner surface. */
+.prize-neon-inner::after {
   content: "";
   position: absolute;
   inset: 0;
   background: linear-gradient(
     105deg,
-    transparent 30%,
-    rgba(255, 255, 255, 0.5) 48%,
-    rgba(255, 255, 255, 0.7) 50%,
-    rgba(255, 255, 255, 0.5) 52%,
-    transparent 70%
+    transparent 35%,
+    rgba(0, 194, 255, 0.14) 48%,
+    rgba(255, 255, 255, 0.22) 50%,
+    rgba(230, 0, 126, 0.14) 52%,
+    transparent 65%
   );
   transform: translateX(-120%);
-  animation: prize-shine 4s ease-in-out infinite;
+  animation: prize-sheen 4.5s ease-in-out infinite;
   pointer-events: none;
 }
 
-@keyframes prize-pulse {
-  0%, 100% { box-shadow: 0 0 32px rgba(212, 175, 55, 0.3), 0 8px 24px rgba(0, 0, 0, 0.4); }
-  50% { box-shadow: 0 0 44px rgba(212, 175, 55, 0.5), 0 8px 24px rgba(0, 0, 0, 0.4); }
+.prize-trophy {
+  font-size: 1.75rem;
+  line-height: 1;
+  filter: drop-shadow(0 0 8px rgba(0, 194, 255, 0.6));
+  animation: prize-bob 2.4s ease-in-out infinite;
 }
 
-@keyframes prize-shine {
+.prize-label {
+  font-size: 0.625rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--color-primary-bright);
+}
+
+.prize-value {
+  font-family: var(--font-display), sans-serif;
+  font-size: 1.875rem;
+  font-weight: 700;
+  line-height: 1;
+  background: linear-gradient(90deg, #00c2ff, #ffffff, #ff3d8b, #00c2ff);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: prize-flow 3s linear infinite;
+}
+
+@keyframes prize-spin {
+  to { transform: rotate(360deg); }
+}
+
+@keyframes prize-glow {
+  0%, 100% { box-shadow: 0 0 26px rgba(0, 100, 255, 0.22), 0 8px 28px rgba(0, 0, 0, 0.5); }
+  50% { box-shadow: 0 0 46px rgba(230, 0, 126, 0.4), 0 0 60px rgba(0, 194, 255, 0.25), 0 8px 28px rgba(0, 0, 0, 0.5); }
+}
+
+@keyframes prize-sheen {
   0%, 100% { transform: translateX(-120%); }
-  40%, 60% { transform: translateX(120%); }
+  45%, 55% { transform: translateX(120%); }
+}
+
+@keyframes prize-bob {
+  0%, 100% { transform: translateY(0) rotate(-4deg); }
+  50% { transform: translateY(-4px) rotate(4deg); }
+}
+
+@keyframes prize-flow {
+  to { background-position: 200% center; }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .prize-banner { animation: none; }
-  .prize-banner-inner::after { animation: none; }
+  .prize-neon,
+  .prize-neon::before,
+  .prize-neon-inner::after,
+  .prize-trophy,
+  .prize-value {
+    animation: none;
+  }
 }

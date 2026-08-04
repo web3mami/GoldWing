@@ -106,20 +106,14 @@ export default async function TournamentPage({
             </p>
           )}
 
-          {/* Prize pool — standout */}
+          {/* Prize pool — neon showpiece */}
           {tournament.prize_pool && (
-            <div className="prize-banner mt-6">
-              <div className="prize-banner-inner">
-                <div className="flex items-center gap-3">
-                  <span className="text-2xl sm:text-3xl">🏆</span>
-                  <div>
-                    <p className="text-[0.625rem] font-bold uppercase tracking-[0.2em] text-ink/70">
-                      Prize pool
-                    </p>
-                    <p className="font-display text-3xl font-bold leading-none text-ink sm:text-4xl">
-                      {tournament.prize_pool}
-                    </p>
-                  </div>
+            <div className="prize-neon mt-6 max-w-md">
+              <div className="prize-neon-inner">
+                <span className="prize-trophy">🏆</span>
+                <div>
+                  <p className="prize-label">Prize pool</p>
+                  <p className="prize-value sm:text-4xl">{tournament.prize_pool}</p>
                 </div>
               </div>
             </div>
