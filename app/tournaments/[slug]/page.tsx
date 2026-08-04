@@ -4,6 +4,7 @@ import { notFound } from "next/navigation";
 import { sql } from "@/lib/db";
 import RegisterForm from "./register-form";
 import Countdown from "./countdown";
+import KickIntro from "./kick-intro";
 
 type Tournament = {
   id: string;
@@ -72,6 +73,8 @@ export default async function TournamentPage({
 
   return (
     <div className="fut-bg flex min-h-full flex-col">
+      <KickIntro slug={tournament.slug} />
+
       {/* Nav */}
       <header className="relative z-10 border-b border-border/80 bg-ink/80 backdrop-blur-sm">
         <div className="mx-auto flex max-w-5xl items-center justify-between px-6 py-4">

@@ -266,6 +266,153 @@ body {
   animation: prize-bob 2.4s ease-in-out infinite;
 }
 
+/* Neon SVG prize icon — glow + gentle bob */
+.prize-icon-glow {
+  filter: drop-shadow(0 0 6px rgba(0, 194, 255, 0.7)) drop-shadow(0 0 10px rgba(230, 0, 126, 0.4));
+  animation: prize-bob 2.6s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .prize-icon-glow { animation: none; }
+}
+
+/* ===== Kick-off intro ===== */
+.kick-intro {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  background:
+    radial-gradient(ellipse 70% 60% at 50% 50%, rgba(0, 100, 255, 0.18), transparent 70%),
+    #06060a;
+  animation: kick-outro 0.45s ease 1.55s forwards;
+}
+
+.kick-stage {
+  position: relative;
+  width: min(92vw, 720px);
+  height: 320px;
+}
+
+/* Perspective pitch lines */
+.kick-pitch {
+  position: absolute;
+  inset: auto 0 0 0;
+  height: 60%;
+  background-image:
+    repeating-linear-gradient(90deg, rgba(0, 194, 255, 0.12) 0 2px, transparent 2px 64px),
+    linear-gradient(180deg, transparent, rgba(0, 194, 255, 0.06));
+  transform: perspective(400px) rotateX(58deg);
+  transform-origin: bottom;
+  opacity: 0.7;
+}
+
+.kick-leg {
+  position: absolute;
+  left: 24%;
+  bottom: 14%;
+  width: 84px;
+  height: 140px;
+  transform-origin: top center;
+  transform: rotate(-48deg);
+  filter: drop-shadow(0 0 10px rgba(0, 194, 255, 0.5));
+  animation: kick-leg-swing 0.9s cubic-bezier(0.5, 0, 0.3, 1) forwards;
+}
+
+.kick-ball {
+  position: absolute;
+  left: 44%;
+  bottom: 16%;
+  width: 48px;
+  height: 48px;
+  transform: translate(0, 0) rotate(0deg);
+  animation: kick-ball-fly 1s cubic-bezier(0.3, 0, 0.2, 1) 0.5s forwards;
+}
+
+.kick-ball-svg {
+  width: 100%;
+  height: 100%;
+  filter: drop-shadow(0 0 10px rgba(0, 194, 255, 0.8));
+}
+
+.kick-ball-trail {
+  position: absolute;
+  right: 60%;
+  top: 50%;
+  width: 0;
+  height: 6px;
+  transform: translateY(-50%);
+  background: linear-gradient(90deg, transparent, #00c2ff, #e6007e);
+  border-radius: 999px;
+  filter: blur(2px);
+  opacity: 0;
+  animation: kick-trail 1s ease 0.5s forwards;
+}
+
+.kick-word {
+  position: absolute;
+  left: 50%;
+  top: 18%;
+  transform: translateX(-50%) scale(0.8);
+  font-family: var(--font-display), sans-serif;
+  font-size: clamp(2.5rem, 9vw, 5rem);
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  white-space: nowrap;
+  background: linear-gradient(90deg, #00c2ff, #ffffff, #ff3d8b);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  opacity: 0;
+  text-shadow: 0 0 30px rgba(0, 194, 255, 0.4);
+  animation: kick-word 1.4s ease forwards;
+}
+
+.kick-flash {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 78% 34%, rgba(255, 255, 255, 0.95), rgba(0, 194, 255, 0.5) 30%, transparent 60%);
+  opacity: 0;
+  animation: kick-flash 0.55s ease 1.28s forwards;
+}
+
+@keyframes kick-leg-swing {
+  0% { transform: rotate(-48deg); }
+  35% { transform: rotate(-58deg); }
+  60% { transform: rotate(38deg); }
+  100% { transform: rotate(26deg); }
+}
+
+@keyframes kick-ball-fly {
+  0% { transform: translate(0, 0) rotate(0deg); }
+  100% { transform: translate(78vw, -42vh) rotate(1260deg); }
+}
+
+@keyframes kick-trail {
+  0% { width: 0; opacity: 0; }
+  25% { width: 220px; opacity: 0.9; }
+  100% { width: 60px; opacity: 0; right: 10%; }
+}
+
+@keyframes kick-word {
+  0% { opacity: 0; transform: translateX(-50%) scale(0.8); }
+  25% { opacity: 1; transform: translateX(-50%) scale(1); }
+  75% { opacity: 1; }
+  100% { opacity: 0; transform: translateX(-50%) scale(1.05); }
+}
+
+@keyframes kick-flash {
+  0% { opacity: 0; }
+  40% { opacity: 1; }
+  100% { opacity: 0; }
+}
+
+@keyframes kick-outro {
+  to { opacity: 0; visibility: hidden; }
+}
+
 .prize-label {
   font-size: 0.625rem;
   font-weight: 700;
